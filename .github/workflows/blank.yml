@@ -2,14 +2,12 @@ name: My Job
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - name: Run tests
-        run: |
-          chmod +x tests/my_test.sh
-          ./tests/my_test.sh
+      - run: npm run cypress:run
