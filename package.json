@@ -7,9 +7,9 @@
     "cypress:run": "cypress run" 
   },
   "keywords": [],
-  "author": "",
+  "author": "Dionatas Muniz",
   "license": "ISC",
-  "description": "",
+  "description": "Testes básicos de navegação no site amazon.com",
   "devDependencies": {
     "cypress": "^13.17.0"
   },
