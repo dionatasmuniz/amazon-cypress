@@ -1,13 +1,15 @@
-name: My Job
+name: Cypress Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
-  build:
-    runs-on: windows-latest
+  run-tests:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run tests
-      - run: npm run cypress:run
+      - name: Print working directory
+        run: pwd
+      - name: Run Cypress tests
+        run: npm run cypress:run
