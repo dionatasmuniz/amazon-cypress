@@ -33,26 +33,24 @@ jobs:
         with:
           browser: chrome
           headless: true
-          continue-on-error: true  # Faz com que a falha nos testes não pare o workflow
+        continue-on-error: true  # Continue mesmo se os testes falharem
 
-
-      # Step 1: Create a test file (test.txt)
-      - name: Create a test file
-        run: echo "Test file content" > test.txt
-
-      # Step 2: Upload the test file as artifact
-      - name: Upload test file as artifact
+      # Upload Cypress videos (em caso de falha)
+      - name: Upload Cypress videos
         uses: actions/upload-artifact@v3
         with:
-          name: test-file
-          path: test.txt
+          name: cypress-videos
+          path: cypress/videos/
 
-      # Step 3: List files in the results directory (optional debug)
-      - name: List files in results directory
-        run: ls -al cypress/results
+      # Upload Cypress screenshots (em caso de falha)
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
 
-      # Step 4: Upload Cypress test results as artifact
-      - name: Upload Cypress test results as artifact
+      # Upload Cypress test results as artifact
+      - name: Upload Cypress test results
         uses: actions/upload-artifact@v3
         with:
           name: cypress-test-results
