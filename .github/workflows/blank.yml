@@ -33,3 +33,10 @@ jobs:
         with:
           browser: chrome
           headless: true
+
+      # Upload Cypress test results as artifact
+      - name: Upload Cypress test results as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-test-results
+          path: cypress/results/*.json
