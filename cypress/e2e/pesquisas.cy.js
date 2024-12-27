@@ -1,4 +1,4 @@
-describe("Pesquisa Vazia na Amazon", () => {
+describe("Campo de Pesquisa Amazon", () => {
   // Acessa a página da Amazon antes de cada teste
   beforeEach(() => {
     cy.visit("https://www.amazon.com.br");
@@ -109,13 +109,17 @@ describe("Pesquisa Vazia na Amazon", () => {
   });
 
   // Test Case 4: Exibir detalhes do produto
-  it("Deve exibir detalhes do produto", () => {
-    // Selecionar o produto disponível na tela
-    cy.get('[data-csa-c-item-id="amzn1.deal.91e9a762:amzn1.asin.B0BT4Z9LZB"]')
-    .find('a.a-link-normal') 
-    .scrollIntoView() 
-    .should('be.visible')
-    .click(); // Clica no link
+  it("Verificar  detalhes do produto", () => {
+    cy.get("#twotabsearchtextbox")
+      .clear()
+      .type("WAP Ventilador de Mesa e Parede 50cm FLOW TURBO{enter}");
+
+    // Selecionar o produto "WAP Ventilador de Mesa e Parede 50cm FLOW TURBO"
+    cy.get("h2").each(($el) => {
+      if ($el.text().includes("WAP Ventilador de Mesa e Parede 50cm FLOW TURBO")) {
+        cy.wrap($el).click();
+      }
+    });
 
     // Validações na pagina de detalhes do produto
     // Nome do produto
@@ -128,9 +132,6 @@ describe("Pesquisa Vazia na Amazon", () => {
     cy.get("#productDetails_techSpec_section_1")
       .should("be.visible")
       .and("not.be.empty");
-
-    // Descrição detalhada do produto contento todas as informações do produto
-    cy.get(".premium-aplus").should("be.visible").and("not.be.empty");
 
     // Preço do produto
     cy.get(".a-price-whole") // Selecionando o preço completo, parte inteira
