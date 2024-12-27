@@ -2,26 +2,34 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  run-tests:
-    runs-on: windows-latest
+  cypress-run:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      # Checkout
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Configuração Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' 
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: 'lts/*'
+
+      # Instala dependências
       - name: Install dependencies
         run: npm install
+
+      # Executaos testes cypress
       - name: Run Cypress tests
-        run: npm run cypress:run 
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          headless: true
