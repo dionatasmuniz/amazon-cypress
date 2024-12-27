@@ -34,11 +34,22 @@ jobs:
           browser: chrome
           headless: true
 
-      # Debug: List files in the results directory
+      # Step 1: Create a test file (test.txt)
+      - name: Create a test file
+        run: echo "Test file content" > test.txt
+
+      # Step 2: Upload the test file as artifact
+      - name: Upload test file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-file
+          path: test.txt
+
+      # Step 3: List files in the results directory (optional debug)
       - name: List files in results directory
         run: ls -al cypress/results
 
-      # Upload Cypress test results as artifact
+      # Step 4: Upload Cypress test results as artifact
       - name: Upload Cypress test results as artifact
         uses: actions/upload-artifact@v3
         with:
