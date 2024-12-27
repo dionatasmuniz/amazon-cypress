@@ -17,22 +17,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Configuração Node.js
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
 
-      # Instala dependências
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Executaos testes cypress
+      # Run Cypress tests
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
           headless: true
+
+      # Debug: List files in the results directory
+      - name: List files in results directory
+        run: ls -al cypress/results
 
       # Upload Cypress test results as artifact
       - name: Upload Cypress test results as artifact
