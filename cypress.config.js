@@ -2,17 +2,18 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://www.amazon.com.br', 
+    baseUrl: 'https://www.amazon.com.br',
     supportFile: false,
-    reporter: 'mochawesome', 
-    reporterOptions: {
-      reportDir: 'cypress/results', // Diretório onde os relatórios serão salvos
-      overwrite: false,             // Não sobrescrever os relatórios anteriores
-      html: false,                  
-      json: true                    // Gerar relatório JSON
-    },
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // Instala o mochawesome reporter
+      require('cypress-mochawesome-reporter/plugin')(on);
+    },
+    reporter: 'cypress-mochawesome-reporter', // Usa o mochawesome como reporter
+    reporterOptions: {
+      reportDir: 'cypress/results', // Diretorio onde os resultados serão salvos
+      overwrite: false,
+      html: false,
+      json: true,
     },
   },
 });
