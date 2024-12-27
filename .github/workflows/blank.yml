@@ -35,19 +35,13 @@ jobs:
           headless: true
         continue-on-error: true  # Continue mesmo se os testes falharem
 
-      # Create test file - Garantir que a etapa será executada, mesmo que o Cypress falhe
-      - name: Create a test file
-        if: always()  # Garante que essa etapa será executada independente do sucesso ou falha dos testes
-        run: echo "Cypress Test Results" > cypress/results/test-results.txt
-
-      # Upload Cypress test results as artifact - Garantir que seja feito mesmo em caso de falha
-      - name: Upload test file
-        if: always()  # Garante que será feito mesmo se houver falha no Cypress
+      - name: Upload Cypress test results as artifact
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: cypress-test-results
-          path: cypress/results/test-results.txt  # Ajuste o caminho se necessário
-
+          path: cypress/results/*.json  # Aqui é onde os arquivos de resultado devem ser encontrados
+      
       # List files in results directory - Exibe os arquivos no diretório de resultados
       - name: List files in results directory
         if: always()  # Executa independentemente de falhas
