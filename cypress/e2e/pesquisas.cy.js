@@ -111,10 +111,11 @@ describe("Pesquisa Vazia na Amazon", () => {
   // Test Case 4: Exibir detalhes do produto
   it("Deve exibir detalhes do produto", () => {
     // Selecionar o produto disponível na tela
-    cy.get('img[alt*="WAP Ventilador de Mesa e Parede"]')
-      .should("be.visible")
-      .parents("a")
-      .click();
+    cy.get('[data-csa-c-item-id="amzn1.deal.91e9a762:amzn1.asin.B0BT4Z9LZB"]')
+    .find('a.a-link-normal') 
+    .scrollIntoView() 
+    .should('be.visible')
+    .click(); // Clica no link
 
     // Validações na pagina de detalhes do produto
     // Nome do produto
