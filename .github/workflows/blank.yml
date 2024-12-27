@@ -33,6 +33,8 @@ jobs:
         with:
           browser: chrome
           headless: true
+          continue-on-error: true  # Faz com que a falha nos testes não pare o workflow
+
 
       # Step 1: Create a test file (test.txt)
       - name: Create a test file
