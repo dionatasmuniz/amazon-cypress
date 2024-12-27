@@ -12,8 +12,8 @@ module.exports = defineConfig({
     reporterOptions: {
       reportDir: 'cypress/results', // Diretório onde os resultados serão salvos
       overwrite: false,
-      html: false,
-      json: true,
+      html: true,
+      json: false,
     },
   },
 });

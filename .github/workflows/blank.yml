@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: cypress-test-results
-          path: cypress/results/*.json  # Aqui é onde os arquivos de resultado devem ser encontrados
+          path: cypress/results/*.html  # Aqui é onde os arquivos de resultado devem ser encontrados
       
       # List files in results directory - Exibe os arquivos no diretório de resultados
       - name: List files in results directory
